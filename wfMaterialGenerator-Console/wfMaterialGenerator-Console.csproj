@@ -6,4 +6,8 @@
     <RootNamespace>wfMaterialGenerator_Console</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\sdPBR-WFMaterialGenerator\sdPBR-WFMaterialGenerator.csproj" />
+  </ItemGroup>
+
 </Project>
