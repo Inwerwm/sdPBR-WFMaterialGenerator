@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdPBR-WFMaterialGenerator", "sdPBR-WFMaterialGenerator\sdPBR-WFMaterialGenerator.csproj", "{4304F048-26C7-40BC-A5FB-5D18D147DD7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wfMaterialGenerator-Console", "wfMaterialGenerator-Console\wfMaterialGenerator-Console.csproj", "{550C6CA1-512D-4B65-BB68-4081765F75F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4304F048-26C7-40BC-A5FB-5D18D147DD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4304F048-26C7-40BC-A5FB-5D18D147DD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4304F048-26C7-40BC-A5FB-5D18D147DD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{550C6CA1-512D-4B65-BB68-4081765F75F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{550C6CA1-512D-4B65-BB68-4081765F75F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550C6CA1-512D-4B65-BB68-4081765F75F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{550C6CA1-512D-4B65-BB68-4081765F75F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
