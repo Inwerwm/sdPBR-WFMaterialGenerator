@@ -32,9 +32,11 @@ namespace wfMaterialGenerator_Console
             }
             else if(IsDirectory(path))
             {
-                foreach (var filePath in Directory.GetFiles(path).Concat(Directory.GetDirectories(path)))
+                var childrenOfDir = Directory.GetFiles(path).Concat(Directory.GetDirectories(path));
+                
+                foreach (var childItem in childrenOfDir)
                 {
-                    Generate(filePath);
+                    Generate(childItem);
                 }
             }
         }
