@@ -6,6 +6,11 @@
     <RootNamespace>wfMaterialGenerator_Console</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\sdPBR-WFMaterialGenerator\sdPBR-WFMaterialGenerator.csproj" />
   </ItemGroup>
