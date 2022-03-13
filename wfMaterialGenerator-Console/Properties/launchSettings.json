@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "wfMaterialGenerator-Console": {
+      "commandName": "Project",
+      "commandLineArgs": "materialSpecific wf_materialSpecific",
+      "workingDirectory": "C:\\MMD\\_エフェクト\\_NenemSdmn\\sdPBR"
+    }
+  }
+}
