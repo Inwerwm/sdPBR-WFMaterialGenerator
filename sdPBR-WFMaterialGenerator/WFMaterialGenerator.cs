@@ -21,21 +21,22 @@ namespace sdPBR_WFMaterialGenerator
                 throw new ArgumentException("出力先材質フォルダとして指定されたフォルダが見つかりませんでした。");
             }
 
-            SourceDirectory = sourceDirectory;
-            DestinationDirectory = destinationDirectory;
+            SourceDirectory = Path.GetFullPath("sourceDirectory");
+            DestinationDirectory = Path.GetFullPath("destinationDirectory");
         }
 
         public void Generate()
         {
-            
+            foreach (var (path, contents) in CreateMaterials(SourceDirectory))
+            {
+                WriteFile(path, contents);
+            }
         }
 
         private IEnumerable<(string OutputPath, string Contents)> CreateMaterials(string path)
            => IsDirectory(path) ? GetChildItems(path).SelectMany(CreateMaterials)
             : IsEffectFile(path) ? Return(CreateWFMaterial(path))
             : Enumerable.Empty<(string OutputPath, string Contents)>();
-
-        private bool IsEffectFile(string path) => Path.GetExtension(path).ToLower() == ".fx";
 
         private (string OutputPath, string Contents) CreateWFMaterial(string path)
         {
@@ -45,26 +46,28 @@ namespace sdPBR_WFMaterialGenerator
             return (destinationPath, GenerateMaterialString(path));
         }
 
-        private static IEnumerable<T> Return<T>(T value)
+        private static string GenerateMaterialString(string sourceFilePath) =>
+            $"#define IN_THE_MIRROR{Environment.NewLine}" +
+            $"#include \"{Path.GetFileName(sourceFilePath)}\"";
+
+        private static void WriteFile(string outputPath, string contents)
         {
-            yield return value;
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            File.WriteAllText(outputPath, contents, Encoding.GetEncoding("shift_jis"));
         }
 
         private static bool IsDirectory(string path) => Directory.Exists(path);
+
+        private bool IsEffectFile(string path) => Path.GetExtension(path).ToLower() == ".fx";
 
         private static IEnumerable<string> GetChildItems(string path)
         {
             return Directory.GetFiles(path).Concat(Directory.GetDirectories(path));
         }
 
-        private static string GenerateMaterialString(string sourceFilePath) =>
-            $"#define IN_THE_MIRROR{Environment.NewLine}" +
-            $"#include \"{Path.GetFileName(sourceFilePath)}\"";
-
-        private static void WriteFile(string outputPath, string materialString)
+        private static IEnumerable<T> Return<T>(T value)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            File.WriteAllText(outputPath, materialString, Encoding.GetEncoding("shift_jis"));
+            yield return value;
         }
     }
 }
