@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 
@@ -21,8 +21,9 @@ namespace sdPBR_WFMaterialGenerator
                 throw new ArgumentException("出力先材質フォルダとして指定されたフォルダが見つかりませんでした。");
             }
 
-            SourceDirectory = Path.GetFullPath("sourceDirectory");
-            DestinationDirectory = Path.GetFullPath("destinationDirectory");
+            SourceDirectory = Path.GetFullPath(sourceDirectory);
+            DestinationDirectory = Path.GetFullPath(destinationDirectory);
+
         }
 
         public void Generate()
