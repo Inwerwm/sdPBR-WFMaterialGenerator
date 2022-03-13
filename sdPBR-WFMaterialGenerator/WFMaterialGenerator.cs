@@ -4,19 +4,19 @@ using System.Text;
 
 namespace sdPBR_WFMaterialGenerator
 {
-    public class WFMaterialGenerator
+    public static class WFMaterialGenerator
     {
-        private string GenerateMaterialString(string targetFilePath) =>
+        private static string GenerateMaterialString(string targetFilePath) =>
             $"#define IN_THE_MIRROR{Environment.NewLine}" +
             $"#include \"{Path.GetFileName(targetFilePath)}\"";
 
-        private void WriteFile(string outputFilename, string materialString)
+        private static void WriteFile(string outputFilename, string materialString)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             File.WriteAllText(outputFilename, materialString, Encoding.GetEncoding("shift_jis"));
         }
 
-        public void GenerateWFMaterial(string targetFilePath)
+        private static void GenerateWFMaterial(string targetFilePath)
         {
             var targetDir = Path.GetDirectoryName(targetFilePath);
             var targetFilename = Path.GetFileName(targetFilePath);
