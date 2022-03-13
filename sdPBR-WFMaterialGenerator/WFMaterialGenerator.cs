@@ -16,6 +16,9 @@ namespace sdPBR_WFMaterialGenerator
             $"#define IN_THE_MIRROR{Environment.NewLine}" +
             $"#include \"{Path.GetFileName(sourceFilePath)}\"";
 
+        private static bool IsDirectory(string path) => Directory.Exists(path);
+        private static bool IsFile(string path) => File.Exists(path);
+
         public static void Generate(string sourceMaterialDirectory, string destinationMaterialDirectory)
         {
 
