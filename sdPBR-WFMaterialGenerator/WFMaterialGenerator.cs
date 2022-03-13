@@ -69,10 +69,7 @@ namespace sdPBR_WFMaterialGenerator
 
         private static bool IsEffectFile(string path) => Path.GetExtension(path).ToLower() == ".fx";
 
-        private static IEnumerable<string> GetChildItems(string path)
-        {
-            return Directory.GetFiles(path).Concat(Directory.GetDirectories(path));
-        }
+        private static IEnumerable<string> GetChildItems(string path) => Directory.GetFiles(path).Concat(Directory.GetDirectories(path));
 
         private static IEnumerable<T> Return<T>(T value)
         {
