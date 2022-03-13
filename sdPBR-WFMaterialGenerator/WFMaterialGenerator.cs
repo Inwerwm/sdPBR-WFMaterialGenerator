@@ -7,6 +7,11 @@ namespace sdPBR_WFMaterialGenerator
         private string SourceDirectory { get; }
         private string DestinationDirectory { get; }
 
+        /// <summary>
+        /// 作成先ディレクトリから元材質フォルダへの相対パス
+        /// </summary>
+        private string DestToSrcRelativePath { get; }
+
         public WFMaterialGenerator(string sourceDirectory, string destinationDirectory)
         {
             if (!IsDirectory(sourceDirectory))
@@ -21,6 +26,7 @@ namespace sdPBR_WFMaterialGenerator
 
             SourceDirectory = Path.GetFullPath(sourceDirectory);
             DestinationDirectory = Path.GetFullPath(destinationDirectory);
+            DestToSrcRelativePath = Path.GetRelativePath(DestinationDirectory, SourceDirectory);
         }
 
         public void Generate()
@@ -40,15 +46,21 @@ namespace sdPBR_WFMaterialGenerator
 
         private (string OutputPath, string Contents) CreateWFMaterial(string path)
         {
-            var sourceRelativePath = Path.GetRelativePath(SourceDirectory, path);
-            var destinationPath = Path.Combine(DestinationDirectory, sourceRelativePath);
+            // 元の材質フォルダと作成先フォルダとで共通している部分のファイルパス
+            var relativeFilePath = Path.GetRelativePath(SourceDirectory, path);
 
-            return (destinationPath, GenerateMaterialString(path));
+            // 作成ファイルのフルパス
+            var destinationPath = Path.Combine(DestinationDirectory, relativeFilePath);
+
+            // 作成される鏡面用エフェクトファイルから元材質ファイルへの相対パス
+            string sourceRelativePathFromDest = Path.Combine(DestToSrcRelativePath, relativeFilePath);
+
+            return (destinationPath, GenerateMaterialString(sourceRelativePathFromDest));
         }
 
         private static string GenerateMaterialString(string sourceFilePath) =>
             $"#define IN_THE_MIRROR{Environment.NewLine}" +
-            $"#include \"{Path.GetFileName(sourceFilePath)}\"";
+            $"#include \"{sourceFilePath}\"";
 
         private static void WriteFile(string outputPath, string contents)
         {
