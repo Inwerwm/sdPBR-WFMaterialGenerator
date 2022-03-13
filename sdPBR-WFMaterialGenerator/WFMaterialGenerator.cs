@@ -21,7 +21,18 @@ namespace sdPBR_WFMaterialGenerator
 
         public static void Generate(string sourceMaterialDirectory, string destinationMaterialDirectory)
         {
+            if(!IsDirectory(sourceMaterialDirectory))
+            {
+                throw new ArgumentException("作成元材質フォルダとして指定されたフォルダが見つかりませんでした。");
+            }
+
+            if (!IsDirectory(destinationMaterialDirectory))
+            {
+                throw new ArgumentException("出力先材質フォルダとして指定されたフォルダが見つかりませんでした。");
+            }
+
 
         }
+
     }
 }
