@@ -60,7 +60,7 @@ namespace sdPBR_WFMaterialGenerator
 
         private static string GenerateMaterialString(string sourceFilePath) =>
             $"#define IN_THE_MIRROR{Environment.NewLine}" +
-            $"#include \"{sourceFilePath}\"";
+            $"#include \"{sourceFilePath.Replace("\\", "\\\\")}\"";
 
         private static void WriteFile(string outputPath, string contents)
         {
