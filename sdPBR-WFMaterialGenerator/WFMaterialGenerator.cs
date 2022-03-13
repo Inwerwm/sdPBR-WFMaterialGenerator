@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 
 namespace sdPBR_WFMaterialGenerator
 {
@@ -23,11 +21,12 @@ namespace sdPBR_WFMaterialGenerator
 
             SourceDirectory = Path.GetFullPath(sourceDirectory);
             DestinationDirectory = Path.GetFullPath(destinationDirectory);
-
         }
 
         public void Generate()
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             foreach (var (path, contents) in CreateMaterials(SourceDirectory))
             {
                 WriteFile(path, contents);
@@ -53,8 +52,6 @@ namespace sdPBR_WFMaterialGenerator
 
         private static void WriteFile(string outputPath, string contents)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath) ?? "");
             File.WriteAllText(outputPath, contents, Encoding.GetEncoding("shift_jis"));
         }
