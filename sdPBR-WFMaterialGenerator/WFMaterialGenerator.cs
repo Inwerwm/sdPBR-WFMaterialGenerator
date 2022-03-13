@@ -6,22 +6,22 @@ namespace sdPBR_WFMaterialGenerator
 {
     public static class WFMaterialGenerator
     {
-        private static string GenerateMaterialString(string targetFilePath) =>
-            $"#define IN_THE_MIRROR{Environment.NewLine}" +
-            $"#include \"{Path.GetFileName(targetFilePath)}\"";
-
-        private static void WriteFile(string outputFilename, string materialString)
+        private static void WriteFile(string outputPath, string materialString)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            File.WriteAllText(outputFilename, materialString, Encoding.GetEncoding("shift_jis"));
+            File.WriteAllText(outputPath, materialString, Encoding.GetEncoding("shift_jis"));
         }
 
-        private static void GenerateWFMaterial(string targetFilePath)
-        {
-            var targetDir = Path.GetDirectoryName(targetFilePath);
-            var targetFilename = Path.GetFileName(targetFilePath);
+        private static string GenerateMaterialString(string sourceFilePath) =>
+            $"#define IN_THE_MIRROR{Environment.NewLine}" +
+            $"#include \"{Path.GetFileName(sourceFilePath)}\"";
 
-            WriteFile(Path.Combine(targetDir, "wf_" + targetFilename), GenerateMaterialString(targetFilePath));
+        private static void GenerateWFMaterial(string sourceFilePath)
+        {
+            var targetDir = Path.GetDirectoryName(sourceFilePath);
+            var targetFilename = "wf_" + Path.GetFileName(sourceFilePath);
+
+            WriteFile(Path.Combine(targetDir, targetFilename), GenerateMaterialString(sourceFilePath));
         }
     }
 }
