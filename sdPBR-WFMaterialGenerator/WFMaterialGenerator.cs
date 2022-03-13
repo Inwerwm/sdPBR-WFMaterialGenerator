@@ -16,12 +16,9 @@ namespace sdPBR_WFMaterialGenerator
             $"#define IN_THE_MIRROR{Environment.NewLine}" +
             $"#include \"{Path.GetFileName(sourceFilePath)}\"";
 
-        private static void GenerateWFMaterial(string sourceFilePath)
+        public static void Generate(string sourceMaterialDirectory, string destinationMaterialDirectory)
         {
-            var targetDir = Path.GetDirectoryName(sourceFilePath);
-            var targetFilename = "wf_" + Path.GetFileName(sourceFilePath);
 
-            WriteFile(Path.Combine(targetDir, targetFilename), GenerateMaterialString(sourceFilePath));
         }
     }
 }
