@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 
@@ -54,6 +54,8 @@ namespace sdPBR_WFMaterialGenerator
         private static void WriteFile(string outputPath, string contents)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath) ?? "");
             File.WriteAllText(outputPath, contents, Encoding.GetEncoding("shift_jis"));
         }
 
